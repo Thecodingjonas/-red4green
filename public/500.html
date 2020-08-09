@@ -4,63 +4,153 @@
   <title>We're sorry, but something went wrong (500)</title>
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <style>
-  .rails-default-error-page {
-    background-color: #EFEFEF;
-    color: #2E2F30;
-    text-align: center;
-    font-family: arial, sans-serif;
-    margin: 0;
+  * {
+    box-sizing: border-box;
   }
 
-  .rails-default-error-page div.dialog {
-    width: 95%;
-    max-width: 33em;
-    margin: 4em auto 0;
+  html {
+    font: 16px 'Roboto', sans-serif;
+    cursor: default;
+    pointer-events: none;
+    user-select: none;
   }
 
-  .rails-default-error-page div.dialog > div {
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #BBB;
-    border-top: #B00100 solid 4px;
-    border-top-left-radius: 9px;
-    border-top-right-radius: 9px;
-    background-color: white;
-    padding: 7px 12% 0;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  body {
+    background: #000;
   }
 
-  .rails-default-error-page h1 {
-    font-size: 100%;
-    color: #730E15;
-    line-height: 1.5em;
+  .oj-500 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    min-height: 100%;
   }
-
-  .rails-default-error-page div.dialog > p {
-    margin: 0 0 1em;
-    padding: 1em;
-    background-color: #F7F7F7;
-    border: 1px solid #CCC;
-    border-right-color: #999;
-    border-left-color: #999;
-    border-bottom-color: #999;
-    border-bottom-left-radius: 4px;
-    border-bottom-right-radius: 4px;
-    border-top-color: #DADADA;
-    color: #666;
-    box-shadow: 0 3px 8px rgba(50, 50, 50, 0.17);
+  @keyframes ol-500-text--entrance {
+    0% {
+      opacity: 0;
+      transform: scale(1.2);
+    }
+  }
+  @keyframes ol-500-text--flicker {
+    0%, 29% {
+      opacity: .2;
+    }
+    30%, 34% {
+      opacity: .4;
+    }
+    35%, 39% {
+      opacity: .1;
+    }
+    40%, 49% {
+      opacity: .2;
+    }
+    50%, 100% {
+      opacity: .1;
+    }
+  }
+  @keyframes ol-500-text-letter--flicker {
+    0%, 9% {
+      opacity: 1;
+    }
+    10%, 29% {
+      opacity: .5;
+    }
+    30%, 34% {
+      opacity: 1;
+    }
+    35%, 49% {
+      opacity: 0;
+    }
+    50%, 100% {
+      opacity: 1;
+    }
+  }
+  .oj-500-text {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    font-size: 28vmin;
+    font-weight: 700;
+    color: #ff038a;
+    z-index: 1;
+    animation: ol-500-text--flicker 3s ease infinite;
+  }
+  .oj-500-text span:nth-child(2) {
+    animation: ol-500-text-letter--flicker 1.5s ease infinite .2s;
+  }
+  .oj-500-text span:nth-child(3) {
+    animation: ol-500-text-letter--flicker 2s ease infinite .1s;
+  }
+  .oj-500-terminal {
+    position: absolute;
+    color: #aaa;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    padding: 2rem;
+  }
+  @keyframes ol-500-terminal-line--animate {
+    0% {
+      width: 0%;
+    }
+  }
+  @keyframes ol-500-terminal-line--entrance {
+    0% {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+  }
+  .oj-500-terminal div {
+    width: 1100px;
+    overflow: hidden;
+    margin: .8rem 0;
+    white-space: nowrap;
+    font: 16px monospace;
+    letter-spacing: 2px;
+    animation: ol-500-terminal-line--animate 4s steps(100, end), ol-500-terminal-line--entrance 0.3s ease;
+    animation-fill-mode: backwards;
+  }
+  .oj-500-terminal div:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .oj-500-terminal div:nth-child(2) {
+    animation-delay: 1.5s;
+  }
+  .oj-500-terminal div:nth-child(3) {
+    animation-delay: 3s;
+  }
+  .oj-500-terminal div:nth-child(4) {
+    animation-delay: 4.5s;
+  }
+  .oj-500-terminal div:nth-child(5) {
+    animation-delay: 6s;
   }
   </style>
 </head>
 
 <body class="rails-default-error-page">
   <!-- This file lives in public/500.html -->
-  <div class="dialog">
-    <div>
-      <h1>We're sorry, but something went wrong.</h1>
+  <body>
+    <div class="oj-500">
+      <div class="oj-500-text">
+        <span>5</span>
+        <span>0</span>
+        <span>0</span>
+      </div>
+      <div class="oj-500-terminal">
+        <div>$ server debugg</div>
+        <div>Something went wrong :(</div>
+        <div>We're working on fixing it.</div>
+        <div>Please try again in a moment.</div>
+      </div>
     </div>
-    <p>If you are the application owner check the logs for more information.</p>
-  </div>
-</body>
+  </body>
 </html>
